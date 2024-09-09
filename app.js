@@ -1,8 +1,8 @@
 const connector = require("./db/connectDb");
 const express = require("express");
 const tasks = require("./routes/tasks");
-const cors = require("cors");
-
+const notFound = require("./middleware/notFound");
+const errorHandler = require("./middleware/errorHandler");
 const app = express();
 
 // connector();
@@ -17,6 +17,8 @@ app.use(express.json());
 //routes
 app.use("/api/v1/tasks", tasks);
 
+app.use(notFound);
+app.use(errorHandler);
 const port = 5000;
 
 connector()
